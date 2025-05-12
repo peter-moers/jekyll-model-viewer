@@ -17,12 +17,12 @@ module Jekyll
       end
   
       def render(context)
-        @@model_viewer_loaded ||= false
         content = ""
       
-        if !@@model_viewer_loaded
+        # Per-page model viewer script injection
+        unless context['model_viewer_loaded']
           content << '<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>'
-          @@model_viewer_loaded = true
+          context['model_viewer_loaded'] = true
         end
       
         src = @attributes["src"]
